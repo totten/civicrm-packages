@@ -6,9 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
+    'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\DependencyInjection\\' => array($vendorDir . '/symfony/dependency-injection'),
+    'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'ParaTest' => array($vendorDir . '/brianium/paratest/src', $vendorDir . '/brianium/paratest/test', $vendorDir . '/brianium/paratest/it'),
+    'Habitat' => array($vendorDir . '/brianium/habitat/src'),
     'Civi\\' => array($baseDir . '/..', $baseDir . '/tests/phpunit'),
     'CRM_' => array($baseDir . '/..'),
 );
