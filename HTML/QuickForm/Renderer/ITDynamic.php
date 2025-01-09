@@ -131,7 +131,7 @@ class HTML_QuickForm_Renderer_ITDynamic extends HTML_QuickForm_Renderer
         if ('qf_header' == $blockName && isset($this->_headerBlock)) {
             $blockName = $this->_headerBlock;
         }
-        $this->_tpl->setVariable('qf_header', $header->toHtml());
+        $this->_tpl->setVariable('qf_header', $header->toDecoratedHtml());
         $this->_tpl->parse($blockName);
         $this->_tpl->parse('qf_main_loop');
     }
@@ -174,7 +174,7 @@ class HTML_QuickForm_Renderer_ITDynamic extends HTML_QuickForm_Renderer
             $mainLabel = $labels;
         }
         // render the element itself with its main label
-        $this->_tpl->setVariable('qf_element', $element->toHtml());
+        $this->_tpl->setVariable('qf_element', $element->toDecoratedHtml());
         if ($this->_tpl->placeholderExists('qf_label', $blockName)) {
             $this->_tpl->setVariable('qf_label', $mainLabel);
         }
@@ -194,7 +194,7 @@ class HTML_QuickForm_Renderer_ITDynamic extends HTML_QuickForm_Renderer
 
     function renderHidden(&$element)
     {
-        $this->_tpl->setVariable('qf_hidden', $element->toHtml());
+        $this->_tpl->setVariable('qf_hidden', $element->toDecoratedHtml());
         $this->_tpl->parse('qf_hidden_loop');
     }
 

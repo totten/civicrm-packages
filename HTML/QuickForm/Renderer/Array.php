@@ -209,7 +209,7 @@ class HTML_QuickForm_Renderer_Array extends HTML_QuickForm_Renderer
     function renderHeader(&$header)
     {
         $this->_ary['sections'][$this->_sectionCount] = array(
-            'header' => $header->toHtml(),
+            'header' => $header->toDecoratedHtml(),
             'name'   => $header->getName()
         );
         $this->_currentSection = $this->_sectionCount++;
@@ -233,7 +233,7 @@ class HTML_QuickForm_Renderer_Array extends HTML_QuickForm_Renderer
             if (!empty($error)) {
                 $this->_ary['errors']['hidden'] = $error;
             }
-            $this->_ary['hidden'] .= $element->toHtml() . "\n";
+            $this->_ary['hidden'] .= $element->toDecoratedHtml() . "\n";
         } else {
             $this->renderElement($element, $required, $error);
         }
@@ -304,7 +304,7 @@ class HTML_QuickForm_Renderer_Array extends HTML_QuickForm_Renderer
             $ret['separator'] = $element->_separator;
             $ret['elements']  = array();
         } else {
-            $ret['html']      = $element->toHtml();
+            $ret['html']      = $element->toDecoratedHtml();
         }
         return $ret;
     }

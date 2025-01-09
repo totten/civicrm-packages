@@ -183,7 +183,7 @@ class HTML_QuickForm_Renderer_ITStatic extends HTML_QuickForm_Renderer
         if (!empty($name) && $this->_tpl->placeHolderExists($this->_formName.'_header_'.$name)) {
             $varName = $this->_formName.'_header_'.$name;
         }
-        $this->_tpl->setVariable($varName, $header->toHtml());
+        $this->_tpl->setVariable($varName, $header->toDecoratedHtml());
     } // end func renderHeader
 
    /**
@@ -211,7 +211,7 @@ class HTML_QuickForm_Renderer_ITStatic extends HTML_QuickForm_Renderer
                 $varName .= '_' == substr($varName, -1)? '': '_';
                 // element name is of type : group[name]
                 $label = $element->getLabel();
-                $html = $element->toHtml();
+                $html = $element->toDecoratedHtml();
 
                 if ($required && !$element->isFrozen()) {
                     $this->_renderRequired($label, $html);
@@ -242,7 +242,7 @@ class HTML_QuickForm_Renderer_ITStatic extends HTML_QuickForm_Renderer
             }
 
             $label = $element->getLabel();
-            $html = $element->toHtml();
+            $html = $element->toDecoratedHtml();
 
             if ($required) {
                 $this->_showRequired = true;
@@ -272,11 +272,11 @@ class HTML_QuickForm_Renderer_ITStatic extends HTML_QuickForm_Renderer
     function renderHidden(&$element)
     {
         if ($this->_tpl->placeholderExists($this->_formName . '_hidden')) {
-            $this->_hidden .= $element->toHtml();
+            $this->_hidden .= $element->toDecoratedHtml();
         } else {
             $name = $element->getName();
             $name = str_replace(array('[', ']'), array('_', ''), $name);
-            $this->_tpl->setVariable($this->_formName.'_'.$name.'_html', $element->toHtml());
+            $this->_tpl->setVariable($this->_formName.'_'.$name.'_html', $element->toDecoratedHtml());
         }
     } // end func renderHidden
 
@@ -296,7 +296,7 @@ class HTML_QuickForm_Renderer_ITStatic extends HTML_QuickForm_Renderer
 
         $this->_elementIndex = 0;
 
-        $html = $this->_tpl->placeholderExists($varName.'_html') ? $group->toHtml() : '';
+        $html = $this->_tpl->placeholderExists($varName.'_html') ? $group->toDecoratedHtml() : '';
         $label = $group->getLabel();
 
         if ($required) {

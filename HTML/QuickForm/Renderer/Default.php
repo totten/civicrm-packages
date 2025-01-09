@@ -223,9 +223,9 @@ class HTML_QuickForm_Renderer_Default extends HTML_QuickForm_Renderer
     {
         $name = $header->getName();
         if (!empty($name) && isset($this->_templates[$name])) {
-            $this->_html .= str_replace('{header}', $header->toHtml(), $this->_templates[$name]);
+            $this->_html .= str_replace('{header}', $header->toDecoratedHtml(), $this->_templates[$name]);
         } else {
-            $this->_html .= str_replace('{header}', $header->toHtml(), $this->_headerTemplate);
+            $this->_html .= str_replace('{header}', $header->toDecoratedHtml(), $this->_headerTemplate);
         }
     } // end func renderHeader
 
@@ -297,7 +297,7 @@ class HTML_QuickForm_Renderer_Default extends HTML_QuickForm_Renderer
 
         if (!$this->_inGroup) {
             $html = $this->_prepareTemplate($element->getName(), $element->getLabel(), $required, $error);
-            $this->_html .= str_replace('{element}', $element->toHtml(), $html);
+            $this->_html .= str_replace('{element}', $element->toDecoratedHtml(), $html);
 
         } elseif (!empty($this->_groupElementTemplate)) {
             $html = str_replace('{label}', $element->getLabel(), $this->_groupElementTemplate);
@@ -307,10 +307,10 @@ class HTML_QuickForm_Renderer_Default extends HTML_QuickForm_Renderer
             } else {
                 $html = preg_replace("/([ \t\n\r]*)?<!-- BEGIN required -->.*<!-- END required -->([ \t\n\r]*)?/isU", '', $html);
             }
-            $this->_groupElements[] = str_replace('{element}', $element->toHtml(), $html);
+            $this->_groupElements[] = str_replace('{element}', $element->toDecoratedHtml(), $html);
 
         } else {
-            $this->_groupElements[] = $element->toHtml();
+            $this->_groupElements[] = $element->toDecoratedHtml();
         }
     } // end func renderElement
 
@@ -324,7 +324,7 @@ class HTML_QuickForm_Renderer_Default extends HTML_QuickForm_Renderer
     */
     function renderHidden(&$element)
     {
-        $this->_hiddenHtml .= $element->toHtml() . "\n";
+        $this->_hiddenHtml .= $element->toDecoratedHtml() . "\n";
     } // end func renderHidden
 
    /**
@@ -336,7 +336,7 @@ class HTML_QuickForm_Renderer_Default extends HTML_QuickForm_Renderer
     */
     function renderHtml(&$data)
     {
-        $this->_html .= $data->toHtml();
+        $this->_html .= $data->toDecoratedHtml();
     } // end func renderHtml
 
    /**

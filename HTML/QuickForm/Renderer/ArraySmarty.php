@@ -152,9 +152,9 @@ class HTML_QuickForm_Renderer_ArraySmarty extends HTML_QuickForm_Renderer_Array
     function renderHeader(&$header)
     {
         if ($name = $header->getName()) {
-            $this->_ary['header'][$name] = $header->toHtml();
+            $this->_ary['header'][$name] = $header->toDecoratedHtml();
         } else {
-            $this->_ary['header'][$this->_sectionCount] = $header->toHtml();
+            $this->_ary['header'][$this->_sectionCount] = $header->toDecoratedHtml();
         }
         $this->_currentSection = $this->_sectionCount++;
     } // end func renderHeader
@@ -189,7 +189,7 @@ class HTML_QuickForm_Renderer_ArraySmarty extends HTML_QuickForm_Renderer_Array
         $ret = parent::_elementToArray($element, $required, $error);
 
         if ('group' == $ret['type']) {
-            $ret['html'] = $element->toHtml();
+            $ret['html'] = $element->toDecoratedHtml();
             // we don't need the elements, see the array structure
             unset($ret['elements']);
         }

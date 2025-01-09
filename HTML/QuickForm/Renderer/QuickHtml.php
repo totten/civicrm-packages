@@ -181,7 +181,7 @@ class HTML_QuickForm_Renderer_QuickHtml extends HTML_QuickForm_Renderer_Default 
         $this->renderedElements[] = array(
                 'name' => $element->getName(),
                 'value' => $element->getValue(),
-                'html' => $element->toHtml(),
+                'html' => $element->toDecoratedHtml(),
                 'rendered' => false);
     } // end func renderHidden
 

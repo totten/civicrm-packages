@@ -137,7 +137,7 @@ class HTML_QuickForm_Renderer_Object extends HTML_QuickForm_Renderer
     function renderHeader(&$header)
     {
         $hobj = new StdClass;
-        $hobj->header = $header->toHtml();
+        $hobj->header = $header->toDecoratedHtml();
         $this->_obj->sections[$this->_sectionCount] = $hobj;
         $this->_currentSection = $this->_sectionCount++;
     }
@@ -155,7 +155,7 @@ class HTML_QuickForm_Renderer_Object extends HTML_QuickForm_Renderer
     function renderHidden(&$element)
     {
         if($this->_collectHidden) {
-            $this->_obj->hidden .= $element->toHtml() . "\n";
+            $this->_obj->hidden .= $element->toDecoratedHtml() . "\n";
         } else {
             $this->renderElement($element, false, null);
         }
@@ -215,7 +215,7 @@ class HTML_QuickForm_Renderer_Object extends HTML_QuickForm_Renderer
             $ret->separator = $element->_separator;
             $ret->elements = array();
         } else {
-            $ret->html = $element->toHtml();
+            $ret->html = $element->toDecoratedHtml();
         }
         return $ret;
     }

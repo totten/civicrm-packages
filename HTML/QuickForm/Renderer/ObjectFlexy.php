@@ -114,9 +114,9 @@ class HTML_QuickForm_Renderer_ObjectFlexy extends HTML_QuickForm_Renderer_Object
     function renderHeader(&$header)
     {
         if($name = $header->getName()) {
-            $this->_obj->header->$name = $header->toHtml();
+            $this->_obj->header->$name = $header->toDecoratedHtml();
         } else {
-            $this->_obj->header[$this->_sectionCount] = $header->toHtml();
+            $this->_obj->header[$this->_sectionCount] = $header->toDecoratedHtml();
         }
         $this->_currentSection = $this->_sectionCount++;
     } // end func renderHeader
@@ -141,7 +141,7 @@ class HTML_QuickForm_Renderer_ObjectFlexy extends HTML_QuickForm_Renderer_Object
     {
         $ret = parent::_elementToObject($element, $required, $error);
         if($ret->type == 'group') {
-            $ret->html = $element->toHtml();
+            $ret->html = $element->toDecoratedHtml();
             unset($ret->elements);
         }
         if(!empty($this->_label)) {

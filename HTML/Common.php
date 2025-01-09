@@ -71,6 +71,13 @@ class HTML_Common
     var $_comment = '';
 
     /**
+     * List of callbacks to filter the HTML of this object.
+     *
+     * @var array
+     */
+    var $_decorators = array();
+
+    /**
      * Class constructor
      * @param    mixed   $attributes     Associative array of table tag attributes
      *                                   or HTML attributes name="value" pairs
@@ -429,7 +436,7 @@ class HTML_Common
      */
     function display()
     {
-        print $this->toHtml();
+        print $this->toDecoratedHtml();
     } // end func display
 
     /**
@@ -461,5 +468,35 @@ class HTML_Common
         }
         return $charset;
     } // end func charset
+
+    /**
+     * Add a filter function that can add decorations around the rendered element.
+     *
+     * Ex: $element->addDecorator(fn($html) => "<strong>$html</strong>");
+     * Ex: $element->addDecorator(fn($html) => "<div class='layout-container'>$html</div>");
+     *
+     * @param callable $decorator
+     *    A filter function which manipulates HTML output.
+     *    Function(string $html, HTML_Common $element): string
+     * @return $this
+     */
+    function addDecorator($decorator) {
+        $this->_decorators[] = $decorator;
+        return $this;
+    }
+
+    /**
+     * Returns the HTML (with any decorations applied).
+     *
+     * @return string
+     */
+    function toDecoratedHtml() {
+      $html = $this->toHtml();
+      foreach ($this->_decorators as $decorator) {
+          $html = $decorator($html, $this);
+      }
+      return $html;
+  }
+
 } // end class HTML_Common
 ?>
