@@ -27,6 +27,7 @@
  * Base class for form elements
  */
 require_once 'HTML/QuickForm/element.php';
+require_once 'HTML/QuickForm/DecoratorTrait.php';
 
 /**
  * HTML class for a form element group
@@ -41,6 +42,8 @@ require_once 'HTML/QuickForm/element.php';
  */
 class HTML_QuickForm_group extends HTML_QuickForm_element
 {
+    use HTML_QuickForm_DecoratorTrait;
+
     // {{{ properties
 
     /**
@@ -298,7 +301,7 @@ class HTML_QuickForm_group extends HTML_QuickForm_element
      * @access      public
      * @return      string
      */
-    function toHtml()
+    function _toHtml()
     {
         include_once('HTML/QuickForm/Renderer/Default.php');
         $renderer = new HTML_QuickForm_Renderer_Default();

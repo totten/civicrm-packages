@@ -26,6 +26,7 @@
  * HTML class for a checkbox type field
  */
 require_once 'HTML/QuickForm/checkbox.php';
+require_once 'HTML/QuickForm/DecoratorTrait.php';
 
 /**
  * HTML class for an advanced checkbox type field
@@ -51,6 +52,8 @@ require_once 'HTML/QuickForm/checkbox.php';
  */
 class HTML_QuickForm_advcheckbox extends HTML_QuickForm_checkbox
 {
+    use HTML_QuickForm_DecoratorTrait;
+
     // {{{ properties
 
     /**
@@ -201,7 +204,7 @@ class HTML_QuickForm_advcheckbox extends HTML_QuickForm_checkbox
      * @access    public
      * @return    string
      */
-    function toHtml()
+    function _toHtml()
     {
         if ($this->_flagFrozen) {
             return parent::toHtml();

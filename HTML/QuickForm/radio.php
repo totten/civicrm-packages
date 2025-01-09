@@ -26,6 +26,7 @@
  * Base class for <input /> form elements
  */
 require_once 'HTML/QuickForm/input.php';
+require_once 'HTML/QuickForm/DecoratorTrait.php';
 
 /**
  * HTML class for a radio type element
@@ -39,6 +40,9 @@ require_once 'HTML/QuickForm/input.php';
  */
 class HTML_QuickForm_radio extends HTML_QuickForm_input
 {
+
+    use HTML_QuickForm_DecoratorTrait;
+
     // {{{ properties
 
     /**
@@ -136,7 +140,7 @@ class HTML_QuickForm_radio extends HTML_QuickForm_input
      * @access    public
      * @return    string
      */
-    function toHtml()
+    function _toHtml()
     {
         if (0 == strlen($this->_text ?? '')) {
             $label = '';
